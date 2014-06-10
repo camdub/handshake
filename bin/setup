@@ -7,7 +7,7 @@
 set -e
 
 # Set up Ruby dependencies via Bundler
-bundle install --binstubs
+bundle install
 
 bundle exec spring binstub --all
 
