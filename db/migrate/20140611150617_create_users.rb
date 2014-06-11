@@ -8,7 +8,8 @@ class CreateUsers < ActiveRecord::Migration
 			t.string :email
 			t.string :phone_number
 			t.string :password
-			t.string :linked_in_accesstoken
+			t.string :handshake_access_token
+			t.string :linkedin_access_token
 			t.decimal :current_latitude
 			t.decimal :current_logitude
 			t.datetime :last_login_timestamp  
