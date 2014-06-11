@@ -27,22 +27,6 @@ ActiveRecord::Schema.define(version: 20140611190641) do
   add_index "account_settings", ["setting_id"], name: "index_account_settings_on_setting_id", using: :btree
   add_index "account_settings", ["user_id"], name: "index_account_settings_on_user_id", using: :btree
 
-  create_table "profile_data", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "profile_type_id"
-    t.boolean  "handshake_user_name"
-    t.boolean  "full_name"
-    t.boolean  "company"
-    t.boolean  "title"
-    t.boolean  "picture"
-    t.boolean  "phone_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "profile_data", ["profile_type_id"], name: "index_profile_data_on_profile_type_id", using: :btree
-  add_index "profile_data", ["user_id"], name: "index_profile_data_on_user_id", using: :btree
-
   create_table "profile_types", force: true do |t|
     t.string   "connection_type"
     t.datetime "created_at"

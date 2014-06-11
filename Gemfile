@@ -10,6 +10,7 @@ gem 'rails', '~> 4.1.0'
 gem 'recipient_interceptor'
 gem 'puma'
 gem 'grape'
+gem 'grape-entity'
 
 group :development do
   gem 'foreman'

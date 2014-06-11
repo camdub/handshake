@@ -4,9 +4,24 @@
   "description": "A basic User object",
   "type": "object",
   "properties": {
-    "a" : {
-      "type" : "integer"
+    "user_name" : {
+      "type" : "string"
+    },
+    "first_name" : {
+      "type" : "string"
+    },
+    "last_name" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "phone_number" : {
+      "type" : "string"
+    },
+    "handshake_access_token" : {
+      "type" : "string"
     }
   },
-  "required" : ["a"]
+  "required" : ["user_name","first_name","last_name","email","phone_number","handshake_access_token"]
 }
