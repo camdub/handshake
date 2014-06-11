@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "User",
+  "description": "A basic User object",
+  "type": "object",
+  "properties": {
+    "a" : {
+      "type" : "integer"
+    }
+  },
+  "required" : ["a"]
+}

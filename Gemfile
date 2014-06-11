@@ -9,6 +9,7 @@ gem 'rack-timeout'
 gem 'rails', '~> 4.1.0'
 gem 'recipient_interceptor'
 gem 'puma'
+gem 'grape'
 
 group :development do
   gem 'foreman'
@@ -31,8 +32,10 @@ group :test do
   gem 'simplecov', require: false
   gem 'timecop'
   gem 'webmock'
+  gem 'json-schema'
 end
 
 group :staging, :production do
   gem 'newrelic_rpm', '>= 3.7.3'
+  gem 'rails_stdout_logging'
 end

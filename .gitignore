@@ -17,3 +17,6 @@
 
 /.powenv
 /.ruby-version
+/converage/
+
+/coverage/

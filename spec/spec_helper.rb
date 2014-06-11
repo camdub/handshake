@@ -17,18 +17,15 @@ end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
-    c.syntax = :expect
+   c.syntax = :expect
   end
 
   config.include Features, type: :feature
-  config.include Formulaic::Dsl, type: :feature
-
+  config.color = true
   config.infer_base_class_for_anonymous_controllers = false
   config.order = 'random'
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.use_transactional_fixtures = false
 end
 
 ActiveRecord::Migration.maintain_test_schema!
-Capybara.javascript_driver = :webkit
 WebMock.disable_net_connect!(allow_localhost: true)
