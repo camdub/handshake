@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: handshake_production
-  username: handshake
-  password: <%= ENV['HANDSHAKE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
