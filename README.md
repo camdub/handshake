@@ -1,5 +1,6 @@
 Handshake
 =========
+[ ![Codeship Status for handshakeapp/Ruby](https://www.codeship.io/projects/67883cf0-d3c9-0131-65d7-2afdf5dd2c07/status?branch=master)](https://www.codeship.io/projects/23511)
 
 Getting Started
 ---------------
