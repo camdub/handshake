@@ -21,8 +21,19 @@ module API
         route_param :username do
           get do
             user = User.find_by_user_name(params[:username])
+            error!('A user with that user name does not exist', 404) if user.nil?
+
             present user, with: API::V1::UserEntity
           end
+        end
+
+        desc "Creates a new user and generates a token"
+        params do
+          requires :user, type: Hash, desc: "user fields"
+        end
+        post do
+          user = User.create(permitted_params[:user])
+          present user, with: API::V1::UserEntity
         end
       end
     end

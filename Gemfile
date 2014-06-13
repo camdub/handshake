@@ -11,6 +11,8 @@ gem 'recipient_interceptor'
 gem 'puma'
 gem 'grape'
 gem 'grape-entity'
+gem 'devise'
+gem 'hashie_rails'
 
 group :development do
   gem 'foreman'
