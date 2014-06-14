@@ -1,14 +1,5 @@
 module API
   module V1
-    class UserEntity < Grape::Entity
-      expose :user_name
-      expose :first_name
-      expose :last_name
-      expose :email
-      expose :phone_number
-      expose :handshake_access_token
-    end
-
     class Users < Grape::API
       version 'v1'
       format :json
@@ -26,7 +17,7 @@ module API
             if headers['Authorization'] != user.handshake_access_token
               error!("Unauthorized", 401)
             end
-            present user, with: API::V1::UserEntity
+            present user, with: API::V1::Entities::User
           end
         end
 
@@ -36,7 +27,7 @@ module API
         end
         post do
           user = User.create(permitted_params[:user])
-          present user, with: API::V1::UserEntity
+          present user, with: API::V1::Entities::User
         end
       end
     end
