@@ -20,9 +20,12 @@ module API
         end
         route_param :username do
           get do
-            user = User.find_by_user_name(params[:username])
-            error!('A user with that user name does not exist', 404) if user.nil?
+            error!("Unauthorized", 401) unless authenticate
 
+            user = User.find_by_user_name(params[:username])
+            if headers['Authorization'] != user.handshake_access_token
+              error!("Unauthorized", 401)
+            end
             present user, with: API::V1::UserEntity
           end
         end
