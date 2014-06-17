@@ -29,7 +29,25 @@ module API
           user = User.create(permitted_params[:user])
           present user, with: API::V1::Entities::User
         end
-      end
+
+        desc "Authenticates a user with user_name and password"
+        params do
+          requires :user, type: Hash, desc: "user fields"
+        end
+        post '/authenticate' do
+          user = User.find_by_email(permitted_params[:user][:email])
+
+          if user.nil?
+            error!("A User with that email doesn't exist", 404)
+          elsif not user.valid_password?(permitted_params[:user][:password])
+            error!("Wrong Password", 422)
+          end
+
+          self.status(200)
+          present user, with: API::V1::Entities::UserToken
+        end
+
+      end # end user resource
     end
   end
 end

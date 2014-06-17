@@ -2,7 +2,7 @@ module API
   module V1
     module ErrorFormatter
       def self.call(message, backtrace, options, env)
-        { message: message }
+        { message: message }.to_json
       end
     end
 
@@ -19,6 +19,7 @@ module API
           token && User.find_by_handshake_access_token(token)
         end
       end
+      rescue_from :all
 
       mount API::V1::Users
     end

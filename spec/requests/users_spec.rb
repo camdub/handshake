@@ -45,6 +45,46 @@ describe "Users API", type: :request do
       expect(response.status).to eq 201 # created
       created = User.find_by_email('camdub@gmail.com')
       expect(created.handshake_access_token).not_to be_empty
+      expect(response.body).to be_valid_against_schema('user')
+    end
+  end
+
+  describe "POST /api/v1/users/authenticate" do
+    let(:endpoint) { '/api/v1/users/authenticate' }
+    let(:valid_user_params) do
+      {
+        user: {
+          email: 'camdub@gmail.com',
+          password: 'testing123'
+        }
+      }
+    end
+    let(:invalid_user_params) do
+      invalid_user_params = valid_user_params
+      invalid_user_params[:user][:password] = 'invalid123'
+      invalid_user_params
+    end
+
+    before(:context) do
+      create :user, email: 'camdub@gmail.com', password: 'testing123'
+    end
+
+    it 'authenticates a user with valid user_name and password' do
+      post endpoint, valid_user_params.to_json, @accept_and_return_json
+
+      expect(response.status).to eq 200
+      expect(JSON.parse(response.body)['handshake_access_token']).not_to be_nil
+    end
+
+    it 'returns an error with invalid credentials' do
+      post endpoint, invalid_user_params.to_json, @accept_and_return_json
+      expect(response.status).to eq 422
+    end
+
+    it 'returns and error with an invalid email' do
+      invalid_user_params[:user][:email] = 'fail@gmail.com'
+      post endpoint, invalid_user_params.to_json, @accept_and_return_json
+      expect(response.status).to eq 404
     end
   end
 end

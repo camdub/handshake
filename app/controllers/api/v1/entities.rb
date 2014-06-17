@@ -9,6 +9,10 @@ module API
         expose :phone_number
         expose :handshake_access_token
       end
+
+      class UserToken < Grape::Entity
+        expose :handshake_access_token
+      end
     end
   end
 end
