@@ -26,7 +26,7 @@ module API
           requires :user, type: Hash, desc: "user fields"
         end
         post do
-          user = User.create(permitted_params[:user])
+          user = User.create!(permitted_params[:user])
           present user, with: API::V1::Entities::User
         end
 

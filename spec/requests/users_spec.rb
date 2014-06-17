@@ -31,20 +31,14 @@ describe "Users API", type: :request do
 
   describe "POST /api/v1/users" do
     let(:user_params) do
-      {
-        user: {
-          email: 'camdub@gmail.com',
-          password: 'testing123'
-        }
-      }
+      { user: attributes_for(:user) }
     end
 
     it 'creates a user with an access token' do
       post '/api/v1/users', user_params.to_json, @accept_and_return_json
 
       expect(response.status).to eq 201 # created
-      created = User.find_by_email('camdub@gmail.com')
-      expect(created.handshake_access_token).not_to be_empty
+      expect(JSON.parse(response.body)['handshake_access_token']).not_to be_empty
       expect(response.body).to be_valid_against_schema('user')
     end
   end
