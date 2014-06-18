@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Setting",
+  "description": "A User settings object",
+  "type":"object",
+  "properties":{
+        "user_account_settings": {
+          "type":"array",
+          "items":
+            {
+              "type":"object",
+              "properties":{
+                "setting_name": {
+                  "type":"string"
+                },
+                "enabled": {
+                  "type":"boolean"
+                }
+              }
+            }
+        },
+        "user_profile_settings": {  
+          "type":"array",
+          "items":  
+            {
+              "type":"object",
+              "properties":{
+                "profile_name": {
+                  "type":"string"
+                },
+                "handshake_user_name": {
+                  "type":"boolean"
+                },
+                "full_name": {
+                  "type":"boolean"
+                },
+                "company": {
+                  "type":"boolean"
+                },
+                "title": {
+                  "type":"boolean"
+                },
+                "picture": {
+                  "type":"boolean"
+                },
+                "phone_number": {
+                  "type":"boolean"
+                }
+              }
+            }
+        }
+  }
+}
