@@ -1,35 +1,5 @@
 module API
   module V1
-    #module Entities
-      
-      #class SettingEntity < Grape::Entity
-        #expose :setting_id, using: API::V1::Entities::AccountSettingEntity
-        #expose :enabled, using: API::V1::AccountSettingEntity
-        #expose :profile_type_id, using: API::V1::ProfileSettingEntity
-        #expose :handshake_user_name, using: API::V1::ProfileSettingEntity
-        #expose :full_name, using: API::V1::ProfileSettingEntity
-        #expose :company, using: API::V1::ProfileSettingEntity
-        #expose :title , using: API::V1::ProfileSettingEntity
-        #expose :picture, using: API::V1::ProfileSettingEntity
-        #expose :phone_number, using: API::V1::ProfileSettingEntity
-      #end
-
-      #class AccountSetting < Grape::Entity
-          #expose :setting_id
-          #expose :enabled
-      #end
-
-      #class UserProfile < Grape::Entity
-        #expose :profile_type_id
-        #expose :handshake_user_name
-        #expose :full_name
-        #expose :company
-        #expose :title 
-        #expose :picture
-        #expose :phone_number
-      #end
-    #end
-
     class Settings < Grape::API
       version 'v1'
       format :json
@@ -42,12 +12,11 @@ module API
           resource :settings do
             desc "Return a user's settings"
             get do
-              #Creating a join
-              #setting = User.joins(:user_profiles).joins(:account_settings).select(:setting_id, :enabled, :profile_type_id, :handshake_user_name, :full_name, :company, :title, :picture, :phone_number)
-              
-              #Seperate calls
-
               user = User.find_by_user_name(params[:username])
+              
+              ap "settings controller"
+              ap user
+              ap user.user_name
 
               accountsettings = AccountSetting.where(user_id: 1).all #User.find_by_user_name(params[:username]).account_settings
               userprofiles = UserProfile.where(user_id: 1).all #User.find_by_user_name(params[:username]).user_profiles

@@ -15,8 +15,8 @@ describe "Users API", type: :request do
 
     it 'returns a user object with a given username' do
       get "/api/v1/users/#{@user.user_name}", {}, @headers
-      #expect(response.status).to eq 200
-      ap body
+      expect(response.status).to eq 200
+
       body = JSON.parse(response.body)
       expect(body).to be_valid_against_schema('user')
     end
