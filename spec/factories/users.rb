@@ -2,12 +2,11 @@
 
 FactoryGirl.define do
   factory :user do
-    user_name 'camdub'
+    sequence(:user_name) { |n| "user#{n}" }
     first_name 'cameron'
     last_name 'wood'
-    email "test@handshake.com"
-    password 'test'
+    sequence(:email) { |n| "email#{n}@handshake.com" }
+    password 'testing123'
     phone_number '760-234-2345'
-    handshake_access_token '1243567'
   end
 end
