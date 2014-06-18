@@ -72,11 +72,11 @@ ActiveRecord::Schema.define(version: 20140612191033) do
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "user_name",              default: ""
-    t.string   "first_name",             default: ""
-    t.string   "last_name",              default: ""
-    t.string   "email",                  default: ""
-    t.string   "phone_number",           default: ""
+    t.string   "user_name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone_number"
     t.string   "password"
     t.string   "handshake_access_token"
     t.string   "linkedin_access_token"

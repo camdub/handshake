@@ -1,6 +1,6 @@
 module API
   module V1
-    module Entities
+    #module Entities
       
       #class SettingEntity < Grape::Entity
         #expose :setting_id, using: API::V1::Entities::AccountSettingEntity
@@ -14,21 +14,21 @@ module API
         #expose :phone_number, using: API::V1::ProfileSettingEntity
       #end
 
-      class AccountSetting < Grape::Entity
-          expose :setting_id
-          expose :enabled
-      end
+      #class AccountSetting < Grape::Entity
+          #expose :setting_id
+          #expose :enabled
+      #end
 
-      class UserProfile < Grape::Entity
-        expose :profile_type_id
-        expose :handshake_user_name
-        expose :full_name
-        expose :company
-        expose :title 
-        expose :picture
-        expose :phone_number
-      end
-    end
+      #class UserProfile < Grape::Entity
+        #expose :profile_type_id
+        #expose :handshake_user_name
+        #expose :full_name
+        #expose :company
+        #expose :title 
+        #expose :picture
+        #expose :phone_number
+      #end
+    #end
 
     class Settings < Grape::API
       version 'v1'
