@@ -24,7 +24,7 @@ module API
         expose :handshake_user_name
         expose :full_name
         expose :company
-        expose :title 
+        expose :title
         expose :picture
         expose :phone_number
       end
