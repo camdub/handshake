@@ -2,6 +2,7 @@ module API
   module V1
     module ErrorFormatter
       def self.call(message, backtrace, options, env)
+        ap backtrace
         { message: message }.to_json
       end
     end
@@ -33,6 +34,7 @@ module API
       rescue_from :all
 
       mount API::V1::Users
+      mount API::V1::Connections
     end
   end
 end

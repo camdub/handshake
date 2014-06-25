@@ -7,8 +7,8 @@ class FindNearbyConnections
   attribute :user, User, default: nil
 
   # dependencies
-  attribute :geocoder, Proc, default: CalculateDistance
-  attribute :connections, Proc, default: GetConnections
+  attribute :geocoder, Proc, default: proc { CalculateDistance }
+  attribute :connections, Proc, default: proc { GetConnections }
 
   validates! :user, presence: true
   validates! :connection_type, inclusion: { in: %w(first second handshake) }

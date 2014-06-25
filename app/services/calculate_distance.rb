@@ -7,12 +7,8 @@ class CalculateDistance
   attribute :connection, User
   attribute :radius, Integer, default: 5 # miles
 
-  validates! :user, presence: true
-  validates! :connection, presence: true
-  validates! :radius, inclusion: 1..50
 
   def call
-    valid?
     distance_between <= 5 ? true : false
   end
 

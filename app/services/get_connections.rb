@@ -24,7 +24,7 @@ class GetConnections
     connections.select! { |i| intersect.include? i.id }
     users = User.where(linkedin_id: ids & api_ids).all
 
-    connections.each do |item|
+    connections.collect! do |item|
       user = users.find { |u| u.linkedin_id == item.id }
       item.merge user.serializable_hash
     end
