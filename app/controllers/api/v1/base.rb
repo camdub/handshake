@@ -18,6 +18,17 @@ module API
           token = headers['Authorization']
           token && User.find_by_handshake_access_token(token)
         end
+
+        def authorize(user_param = :username)
+          unless authenticate && params[user_param]
+            error!("Unauthorized", 401)
+          end
+
+          user_token = User.find_by_user_name(params[user_param]).handshake_access_token
+          if headers['Authorization'] != user_token
+            error!("Unauthorized", 401)
+          end
+        end
       end
       rescue_from :all
 

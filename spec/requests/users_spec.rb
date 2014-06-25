@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Users API", type: :request do
+describe API::V1::Users, type: :request do
   before(:context) do
     @accept_json = { "Accept" => "application/json" }
     @json_content_type = { "Content-Type" => "application/json" }
@@ -40,6 +40,29 @@ describe "Users API", type: :request do
       expect(response.status).to eq 201 # created
       expect(JSON.parse(response.body)['handshake_access_token']).not_to be_empty
       expect(response.body).to be_valid_against_schema('user')
+    end
+
+  end
+
+  describe 'POST /api/v1/users/:user_name' do
+    before(:context) do
+      @user = create :user
+      @headers = @accept_json.merge("Authorization" => @user.handshake_access_token)
+    end
+
+    it 'updates a user\'s location with given long and lat' do
+      locale_params = {
+        user: {
+          current_latitude: '12.325',
+          current_longitude: '-23.234'
+        }
+      }
+
+      post "/api/v1/users/#{@user.user_name}", locale_params, @headers
+      @user.reload
+      expect(response.status).to eq 200
+      expect(@user.current_latitude).not_to be_nil
+      expect(@user.current_longitude).not_to be_nil
     end
   end
 

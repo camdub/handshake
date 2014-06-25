@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  scope :linkedin_ids, ->(user) { where.not(id: user.id).pluck(:linkedin_id) }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
