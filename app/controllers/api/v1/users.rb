@@ -31,9 +31,6 @@ module API
             authorize
 
             user = User.find_by_user_name(params[:username])
-            if headers['Authorization'] != user.handshake_access_token
-              error!("Unauthorized", 401)
-            end
             present user, with: API::V1::Entities::User
           end
 
