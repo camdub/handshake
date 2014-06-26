@@ -2,7 +2,7 @@ module API
   module V1
     module ErrorFormatter
       def self.call(message, backtrace, options, env)
-        ap backtrace
+        ap backtrace unless backtrace.empty?
         { message: message }.to_json
       end
     end
