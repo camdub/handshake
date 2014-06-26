@@ -17,12 +17,12 @@ gem 'redis'
 gem 'linkedin2', git: 'https://github.com/camdub/linkedin2.git'
 gem 'virtus'
 gem 'grape-swagger'
+gem 'mock_redis'
 
 group :development do
   gem 'foreman'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'mock_redis'
 end
 
 group :development, :test do
