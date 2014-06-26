@@ -22,6 +22,7 @@ group :development do
   gem 'foreman'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'mock_redis'
 end
 
 group :development, :test do
