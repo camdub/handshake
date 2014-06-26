@@ -13,11 +13,16 @@ gem 'grape'
 gem 'grape-entity'
 gem 'devise'
 gem 'hashie_rails'
+gem 'redis'
+gem 'linkedin2', git: 'https://github.com/camdub/linkedin2.git'
+gem 'virtus'
+gem 'grape-swagger'
 
 group :development do
   gem 'foreman'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'mock_redis'
 end
 
 group :development, :test do
@@ -26,7 +31,12 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-rails', '>= 2.14'
-  gem 'pry-debugger'
+  gem 'byebug'
+  gem 'pry-byebug', github: 'deivid-rodriguez/pry-byebug'
+  gem 'pry-stack_explorer'
+  gem 'pry-rescue'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :test do
@@ -35,7 +45,6 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
   gem 'timecop'
-  gem 'webmock'
   gem 'json-schema'
 end
 

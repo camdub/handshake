@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612191033) do
+ActiveRecord::Schema.define(version: 20140619212410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20140612191033) do
     t.string   "handshake_access_token"
     t.string   "linkedin_access_token"
     t.decimal  "current_latitude"
-    t.decimal  "current_logitude"
+    t.decimal  "current_longitude"
     t.datetime "last_login_timestamp"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20140612191033) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "linkedin_id",            default: ""
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

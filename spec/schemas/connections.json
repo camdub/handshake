@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Connections",
+  "description": "A list of connections nearby a user of a given type",
+  "type": "object",
+  "properties" : {
+    "connection_type" : {
+      "type" : "string",
+      "description" : "Specifies what kind of connections these are. Only 3 options",
+      "pattern" : "^(first|second|handshake)"
+    },
+    "connections": {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "first_name" : { "type" : "string" },
+          "last_name" : { "type" : "string" },
+          "current_latitude" : { "type" : "number" },
+          "current_longitude" : { "type" : "number" },
+          "picture_url" : { "type" : "string" },
+          "profile_url" : { "type" : "string" },
+          "industry" : { "type" : "string" },
+          "headline" : { "type" : "string" },
+          "location" : {
+            "type" : "object",
+            "properties" : {
+              "country" : {
+                "type" : "object",
+                "properties" : {
+                  "code" : { "type" : "string" }
+                }
+              },
+              "name" : { "type" : "string" }
+            }
+          }
+        },
+        "required" : [
+          "first_name",
+          "last_name",
+          "current_latitude",
+          "current_longitude"
+        ]
+      },
+      "uniqueItems" : true
+    }
+  },
+  "required" : ["connection_type", "connections"]
+}
