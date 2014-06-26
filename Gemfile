@@ -16,6 +16,7 @@ gem 'hashie_rails'
 gem 'redis'
 gem 'linkedin2', git: 'https://github.com/camdub/linkedin2.git'
 gem 'virtus'
+gem 'grape-swagger'
 
 group :development do
   gem 'foreman'

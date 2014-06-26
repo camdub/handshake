@@ -7,7 +7,7 @@ module API
       resource :users do
         desc "Authenticates a user with user_name and password"
         params do
-          requires :user, type: Hash, desc: "user fields"
+          requires :user, type: Hash, desc: "Contains the user name and password fields"
         end
         post '/authenticate' do
           user = User.find_by_email(permitted_params[:user][:email])
@@ -24,7 +24,7 @@ module API
 
         desc "Return a user's basic information"
         params do
-          requires :username, type: String, desc: "username"
+          requires :username, type: String, desc: "User name to get info for"
         end
         route_param :username do
           get do
@@ -37,8 +37,9 @@ module API
             present user, with: API::V1::Entities::User
           end
 
+          desc "Update a user's attributes"
           params do
-            requires :user, type: Hash, desc: "Properties to update"
+            requires :user, type: Hash, desc: "Any user properties to update"
           end
           post do
             authorize
@@ -51,7 +52,7 @@ module API
 
         desc "Creates a new user and generates a token"
         params do
-          requires :user, type: Hash, desc: "user fields"
+          requires :user, type: Hash, desc: "Must contain username and password"
         end
         post do
           user = User.create!(permitted_params[:user])
