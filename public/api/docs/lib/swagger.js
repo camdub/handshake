@@ -1475,13 +1475,7 @@ var ApiKeyAuthorization = function(name, value, type) {
 };
 
 ApiKeyAuthorization.prototype.apply = function(obj, authorizations) {
-  if (this.type === "query") {
-    if (obj.url.indexOf('?') > 0)
-      obj.url = obj.url + "&" + this.name + "=" + this.value;
-    else
-      obj.url = obj.url + "?" + this.name + "=" + this.value;
-    return true;
-  } else if (this.type === "header") {
+  if (this.type === "header") {
     obj.headers[this.name] = this.value;
     return true;
   }

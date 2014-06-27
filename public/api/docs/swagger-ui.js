@@ -2,6 +2,7 @@
 // version 2.0.17
 $(function() {
 
+
 	// Helper function for vertically aligning DOM elements
 	// http://www.seodenver.com/simple-vertical-align-plugin-for-jquery/
 	$.fn.vAlign = function() {
@@ -1371,8 +1372,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       'click #show-pet-store-icon': 'showPetStore',
       'click #show-wordnik-dev-icon': 'showWordnikDev',
       'click #explore': 'showCustom',
-      'keyup #input_baseUrl': 'showCustomOnKeyup',
-      'keyup #input_apiKey': 'showCustomOnKeyup'
+      'keyup #input_baseUrl': 'showCustomOnKeyup'
     };
 
     HeaderView.prototype.initialize = function() {};
@@ -1400,8 +1400,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         e.preventDefault();
       }
       return this.trigger('update-swagger-ui', {
-        url: $('#input_baseUrl').val(),
-        apiKey: $('#input_apiKey').val()
+        url: $('#input_baseUrl').val()
       });
     };
 
@@ -1719,6 +1718,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         opts.responseContentType = $("div select[name=responseContentType]", $(this.el)).val();
         opts.requestContentType = $("div select[name=parameterContentType]", $(this.el)).val();
         $(".response_throbber", $(this.el)).show();
+
+        var key = $('#input_apiKey')[0].value;
+        if(key && key.trim() !== "") {
+          window.authorizations.add("key", new ApiKeyAuthorization("Authorization", key, "header"));
+        }
         if (isFileUpload) {
           return this.handleFileUpload(map, form);
         } else {
