@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :user_profile do
-    user_id '1'
-    profile_type_id '1'
+    user
+    profile_type
     handshake_user_name 'false'
     full_name 'false'
     company 'false'

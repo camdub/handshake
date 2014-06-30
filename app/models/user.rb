@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :user_profiles
-  has_many :account_settings
+  has_many :user_profiles, autosave: true
+  has_many :account_settings, autosave: true
 
   before_save :ensure_access_token
 

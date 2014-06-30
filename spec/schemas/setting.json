@@ -10,7 +10,7 @@
             {
               "type":"object",
               "properties":{
-                "setting_name": {
+                "description": {
                   "type":"string"
                 },
                 "enabled": {
@@ -19,13 +19,13 @@
               }
             }
         },
-        "user_profile_settings": {  
+        "user_profile_settings": {
           "type":"array",
-          "items":  
+          "items":
             {
               "type":"object",
               "properties":{
-                "profile_name": {
+                "connection_type": {
                   "type":"string"
                 },
                 "handshake_user_name": {

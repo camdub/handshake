@@ -14,13 +14,21 @@ module API
         expose :handshake_access_token
       end
 
+      class AccountSettingEntity < Grape::Entity
+        expose :description
+      end
+
       class AccountSetting < Grape::Entity
-          expose :setting_id
-          expose :enabled
+        expose :setting, using: API::V1::Entities::AccountSettingEntity
+        expose :enabled
+      end
+
+      class ProfileTypeEntity < Grape::Entity
+        expose :connection_type
       end
 
       class UserProfile < Grape::Entity
-        expose :profile_type_id
+        expose :profile_type, using: API::V1::Entities::ProfileTypeEntity
         expose :handshake_user_name
         expose :full_name
         expose :company

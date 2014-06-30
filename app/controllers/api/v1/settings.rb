@@ -21,43 +21,34 @@ module API
                 error!("Unauthorized", 401)
               end
 
-              #user = User.find_by_user_name(params[:username])
+              user = User.find_by_user_name(params[:username])
 
-              accountsettings = AccountSetting.where(user_id: 1).all #User.find_by_user_name(params[:username]).account_settings
-              userprofiles = UserProfile.where(user_id: 1).all #User.find_by_user_name(params[:username]).user_profiles
+              accountsettings = user.account_settings
+              userprofiles = user.user_profiles
 
               present :user_account_settings, accountsettings, with: API::V1::Entities::AccountSetting
               present :user_profile_settings, userprofiles, with: API::V1::Entities::UserProfile
+
             end
 
             desc "Set a user's settings"
             params do
-              requires :account_setting, type: Hash, desc: "User's account status"
-              requires :user_profile, type: Hash, desc: "User profile data"
+              requires :account_setting, type: Array, desc: "User's account status"
+              requires :user_profile, type: Array, desc: "User profile data"
             end
 
             post do
-                #ap permitted_params[:account_setting]
-                #ap permitted_params[:user_profile]
+                account_setting_param = params[:account_setting]
+                user_profile_param = params[:user_profile]
 
-                #user = User.find_by_user_name(params[:username])
-                #ap user
+                user = User.find_by_user_name(params[:username])
 
-                #ap User.first.account_settings
+                user.account_settings.destroy_all
+                user.account_settings.build(account_setting_param)
 
-                #user = User.create!(permitted_params[:user])
-                #permitted = permitted_params[:accountsettings]
-                #ap permitted
+                user.user_profiles.destroy_all
+                user.user_profiles.build(user_profile_param)
 
-                #accountsettings = AccountSetting.where(user_id: 1)
-                #userprofiles = UserProfile.where(user_id: 1)
-=begin
-                accountsettings = params[:accountsettings]
-                accountsettings.save
-
-                userprofiles = params[:userprofiles]
-                userprofiles.save
-=end
                 self.status(200)
             end
           end

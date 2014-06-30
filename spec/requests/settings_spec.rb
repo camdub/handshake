@@ -9,18 +9,14 @@ describe "Settings API", type: :request do
 
   describe "GET /api/v1/users/username/settings" do
     before(:context) do
-      @user = create :user
+      @user = create :user_with_settings
       @headers = @accept_json.merge("Authorization" => @user.handshake_access_token)
-
-      user_account_setting = FactoryGirl.create :account_setting
-      user_profile_setting = FactoryGirl.create :user_profile
     end
 
     it 'returns a settings object with a given username' do
 
       get "/api/v1/users/#{@user.user_name}/settings", {}, @headers
       expect(response.status).to eq 200
-
       body = JSON.parse(response.body)
       expect(body).to be_valid_against_schema('setting')
     end
@@ -35,21 +31,22 @@ describe "Settings API", type: :request do
 
   describe "POST /api/v1/users/username/settings" do
     before(:context) do
-      @user = create :user
+      @user = create :user_with_settings
       @headers = @accept_json.merge("Authorization" => @user.handshake_access_token)
 
-      user_account_setting = FactoryGirl.create :account_setting
-      user_profile_setting = FactoryGirl.create :user_profile
+      tmpSetting = create(:setting, description: "View picture")
+      @account_setting_model = create_list(:account_setting, 2, setting: tmpSetting, enabled: true)
+
+      tmpProfile = create(:profile_type)
+      @user_profile_model = create_list(:user_profile, 2, profile_type: tmpProfile)
     end
 
     let(:user_params) do
-      { account_setting: attributes_for(:account_setting),user_profile: attributes_for(:user_profile)}
+      { account_setting: @account_setting_model,user_profile: @user_profile_model}
     end
 
     it 'updates a users settings' do
-
       post "/api/v1/users/#{@user.user_name}/settings", user_params.to_json, @accept_and_return_json
-
       expect(response.status).to eq 200
     end
   end

@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :setting do
+    description 'View username'
   end
 end
