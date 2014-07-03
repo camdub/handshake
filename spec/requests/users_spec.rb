@@ -44,6 +44,48 @@ describe API::V1::Users, type: :request do
 
   end
 
+  describe "POST /api/v1/users" do
+    before(:context) do
+      Setting.delete_all
+      create :setting
+    end
+
+    let(:user_params) do
+      { user: attributes_for(:user) }
+    end
+
+    it 'creates a user and verify account_settings not null' do
+      post '/api/v1/users', user_params.to_json, @accept_and_return_json
+
+      expect(response.status).to eq 201 # created
+      expect(response.body).to be_valid_against_schema('user')
+
+      tempUser = User.all.find_by_user_name(user_params[:user][:user_name])
+      expect(tempUser.account_settings).not_to be_empty
+    end
+  end
+
+  describe "POST /api/v1/users" do
+    before(:context) do
+      ProfileType.delete_all
+      create :profile_type
+    end
+
+    let(:user_params) do
+      { user: attributes_for(:user) }
+    end
+
+    it 'creates a user and verify user_profiles not null' do
+      post '/api/v1/users', user_params.to_json, @accept_and_return_json
+
+      expect(response.status).to eq 201 # created
+      expect(response.body).to be_valid_against_schema('user')
+
+      tempUser = User.all.find_by_user_name(user_params[:user][:user_name])
+      expect(tempUser.user_profiles).not_to be_empty
+    end
+  end
+
   describe 'POST /api/v1/users/:user_name' do
     before(:context) do
       @user = create :user

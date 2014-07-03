@@ -10,6 +10,29 @@ class User < ActiveRecord::Base
 
   before_save :ensure_access_token
 
+  after_create  :set_account_settings
+  after_create  :set_user_profiles
+
+  def set_account_settings
+
+    if Setting.exists?
+      Setting.all.each do |tmp_setting|
+        AccountSetting.create(:user => self, :setting => tmp_setting, :enabled => false)
+      end
+    end
+
+  end
+
+  def set_user_profiles
+
+    if ProfileType.exists?
+      ProfileType.all.each do |temp_profile_type|
+        UserProfile.create(:user => self, :profile_type => temp_profile_type, :handshake_user_name => true, :full_name => true, :company => true, :title => true, :picture => true, :phone_number => true)
+      end
+    end
+
+  end
+
   def ensure_access_token
     self.handshake_access_token ||= generate_token
   end
