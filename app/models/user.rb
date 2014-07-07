@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
 
   scope :linkedin_ids, ->(user) { where.not(id: user.id).pluck(:linkedin_id) }
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable
+
+  validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, :if => :email_changed?
+  validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
 
   has_many :user_profiles, autosave: true
   has_many :account_settings, autosave: true
