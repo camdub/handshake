@@ -4,9 +4,6 @@
   "description": "A basic User object",
   "type": "object",
   "properties": {
-    "user_name" : {
-      "type" : "string"
-    },
     "first_name" : {
       "type" : "string"
     },
@@ -24,5 +21,5 @@
       "pattern": "^.+" // non-empty string
     }
   },
-  "required" : ["user_name","first_name","last_name","email","phone_number","handshake_access_token"]
+  "required" : ["first_name","last_name","email","handshake_access_token"]
 }
