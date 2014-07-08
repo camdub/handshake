@@ -52,7 +52,9 @@ module API
           requires :user, type: Hash, desc: "Must contain username and password"
         end
         post do
-          user = User.create!(permitted_params[:user])
+          user = User.find_by_email permitted_params[:user][:email]
+          user = User.find_or_create_by!(permitted_params[:user]) unless user
+          p user
           present user, with: API::V1::Entities::User
         end
 
